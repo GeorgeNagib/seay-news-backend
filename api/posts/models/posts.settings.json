@@ -1,0 +1,53 @@
+{
+  "kind": "collectionType",
+  "collectionName": "posts",
+  "info": {
+    "name": "posts",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "unique": false,
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "body": {
+      "type": "richtext",
+      "required": true,
+      "minLength": 1
+    },
+    "section": {
+      "model": "sections"
+    },
+    "tags": {
+      "type": "json"
+    },
+    "views": {
+      "type": "integer",
+      "default": 0
+    },
+    "banner": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": true
+    },
+    "brief": {
+      "type": "string",
+      "maxLength": 256,
+      "minLength": 1,
+      "required": true,
+      "default": "فيديو لاستعداد ميدان التحرير لموكب نقل المومياوات الملكية وجولة رئيس الوزراء"
+    }
+  }
+}

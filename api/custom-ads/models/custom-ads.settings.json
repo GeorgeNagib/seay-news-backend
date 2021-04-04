@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "custom_ads",
+  "info": {
+    "name": "customAds"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": true
+    },
+    "link": {
+      "type": "string",
+      "default": "#"
+    },
+    "ads": {
+      "via": "custom_ad",
+      "collection": "ads"
+    }
+  }
+}

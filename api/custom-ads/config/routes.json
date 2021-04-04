@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/custom-ads",
+      "handler": "custom-ads.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/custom-ads/count",
+      "handler": "custom-ads.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/custom-ads/:id",
+      "handler": "custom-ads.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/custom-ads",
+      "handler": "custom-ads.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/custom-ads/:id",
+      "handler": "custom-ads.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/custom-ads/:id",
+      "handler": "custom-ads.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

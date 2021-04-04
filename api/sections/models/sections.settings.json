@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sections",
+  "info": {
+    "name": "sections",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "unique": true,
+      "required": true,
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "premiumPosts": {
+      "collection": "posts"
+    },
+    "rank": {
+      "type": "integer",
+      "unique": true
+    }
+  }
+}
