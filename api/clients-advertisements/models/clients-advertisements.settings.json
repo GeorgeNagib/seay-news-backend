@@ -1,19 +1,28 @@
 {
   "kind": "collectionType",
-  "collectionName": "custom_ads",
+  "collectionName": "clients_advertisements",
   "info": {
-    "name": "customAds"
+    "name": "ClientsAdvertisements",
+    "description": ""
   },
   "options": {
     "increments": true,
     "timestamps": true,
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "attributes": {
-    "name": {
+    "title": {
       "type": "string",
+      "default": "0",
       "required": true,
-      "unique": true
+      "unique": true,
+      "minLength": 1
+    },
+    "link": {
+      "type": "string",
+      "default": "#",
+      "required": true,
+      "minLength": 1
     },
     "image": {
       "model": "file",
@@ -23,14 +32,6 @@
       ],
       "plugin": "upload",
       "required": true
-    },
-    "link": {
-      "type": "string",
-      "default": "#"
-    },
-    "ads": {
-      "via": "custom_ad",
-      "collection": "ads"
     }
   }
 }

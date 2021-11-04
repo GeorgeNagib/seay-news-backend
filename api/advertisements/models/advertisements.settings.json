@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "advertisements",
+  "info": {
+    "name": "Advertisements",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "maxGoogleAds": {
+      "type": "integer",
+      "default": 0,
+      "required": true,
+      "min": 0
+    },
+    "page": {
+      "type": "enumeration",
+      "enum": [
+        "home",
+        "section",
+        "search",
+        "article"
+      ],
+      "unique": true,
+      "required": true
+    },
+    "clients_advertisements": {
+      "collection": "clients-advertisements"
+    }
+  }
+}

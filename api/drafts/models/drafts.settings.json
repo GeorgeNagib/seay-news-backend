@@ -1,8 +1,8 @@
 {
   "kind": "collectionType",
-  "collectionName": "posts",
+  "collectionName": "drafts",
   "info": {
-    "name": "posts",
+    "name": "drafts",
     "description": ""
   },
   "options": {
@@ -15,23 +15,12 @@
       "type": "string",
       "required": true,
       "unique": true,
-      "minLength": 1,
-      "maxLength": 256
+      "minLength": 1
     },
     "body": {
       "type": "richtext",
       "required": true,
       "minLength": 1
-    },
-    "section": {
-      "model": "sections"
-    },
-    "tags": {
-      "type": "json"
-    },
-    "views": {
-      "type": "integer",
-      "default": 0
     },
     "banner": {
       "model": "file",
@@ -42,22 +31,12 @@
       "plugin": "upload",
       "required": true
     },
-    "brief": {
-      "type": "string",
-      "maxLength": 256,
-      "minLength": 1,
+    "tags": {
+      "type": "json",
       "required": true
     },
-    "url": {
-      "type": "string",
-      "unique": true,
-      "required": true,
-      "minLength": 1
-    },
-    "thumbnail": {
-      "type": "string",
-      "required": true,
-      "minLength": 1
+    "section": {
+      "model": "sections"
     }
   }
 }

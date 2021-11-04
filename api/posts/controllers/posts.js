@@ -8,10 +8,10 @@
 module.exports = {
     findOne: async function(ctx) {
 
-        // Setup post model
+        // Setup models
         const postModel = strapi.query('posts').model;
         const sectionsModel = strapi.query('sections').model;
-        const adsModel = strapi.query('ads').model;
+        const adsModel = strapi.query('advertisements').model;
         
         
         // Get post id from parameters
@@ -19,11 +19,11 @@ module.exports = {
         const {title} = ctx.params;
 
         // Get page ads
-        const ads = await adsModel.findOne({page});
+        const ads = await adsModel.findOne({page}).populate("clients_advertisements");
 
         
         // Get post data from mongodb
-        const post = await postModel.findOne({title: title}).populate({path: "section", select: 'name rank'});
+        const post = await postModel.findOne({$or: [{title}, {url: title}]}).populate({path: "section", select: 'name rank'});
 
         // If there's no post with this id, return 404 error
         if(!post) return null;
@@ -34,38 +34,8 @@ module.exports = {
 
         
         // Get related posts with tags as an indicator
-        const alsoRead = await postModel.aggregate(
-            [
-                {$match: {tags: {$in: post.tags || []}, _id: {$ne: post._id}}}, 
-                {$unwind: "$tags"},
-                {$group: {
-                    _id: {
-                        "_id": "$_id",
-                        "title": "$title",
-                        "body": "$body",
-                        "createdAt": "$createdAt",
-                        "tags": "$tags",
-                        "section": "$sections",
-                        "id": "$id",
-                        "banner": "$banner",
-                        "views": "$views"
-                    },
-                    matches:{$sum:1}
-                }}, 
-                {
-                    $lookup:
-                       {
-                          from: "upload_file",
-                          localField: "_id.banner",
-                          foreignField: "_id",
-                          as: "banner"
-                      }
-                 },
-                {$limit: 4},
-                {$sort:{matches:-1}}
-            ]
-            
-        )
+   	 const alsoRead = await postModel.find({tags: {$in: (post.tags || [])}, _id: {$ne: post._id}}).limit(4).sort({_id: -1})
+	
 
 
 
@@ -94,11 +64,11 @@ module.exports = {
         // Get Post Model
         const postModel = strapi.query('posts').model;
         const sectionsModel = strapi.query('sections').model;
-        const adsModel = strapi.query('ads').model;
+        const adsModel = strapi.query('advertisements').model;
 
         const {page = 'search', limit = 1} = ctx.query;
 
-        const ads = await adsModel.find({page});
+        const ads = await adsModel.findOne({page}).populate("clients_advertisements");
 
         const sectionsNames = await sectionsModel.find({}, {name: 1,rank: 1}).sort({rank: 1});
 
